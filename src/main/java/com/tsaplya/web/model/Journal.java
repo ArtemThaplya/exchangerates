@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 
 public class Journal {
     private int id;
-    private String datetime;
     private String date;
     private int currencyCode;
     private BigDecimal rateBuy;
