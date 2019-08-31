@@ -1,4 +1,4 @@
-package com.tsaplya.web;
+package com.tsaplya.web.model;
 
 import java.math.BigDecimal;
 
