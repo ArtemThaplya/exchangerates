@@ -2,6 +2,7 @@ package com.tsaplya.web.service;
 
 import com.tsaplya.web.dao.JournalDao;
 import com.tsaplya.web.model.Journal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -14,6 +15,7 @@ public class SearchEntriesByCodeAndDateImp implements SearchEntriesByCodeAndDate
     private static Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     private Journal result = new Journal();
 
+    @Autowired
     public SearchEntriesByCodeAndDateImp(JournalDao journalDao) {
         this.journalDao = journalDao;
     }

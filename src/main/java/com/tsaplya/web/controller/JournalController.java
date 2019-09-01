@@ -24,4 +24,9 @@ public class JournalController {
     public Journal get(@Valid @PathVariable("currencyCode") int currencyCode) {
         return searchService.getRateBuyAndSale(currencyCode);
     }
+
+    @RequestMapping(value = "/current/rate")
+    public void currentRate() {
+        searchService.getCurrencyRateMonobank();
+    }
 }
