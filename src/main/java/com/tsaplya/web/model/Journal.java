@@ -12,26 +12,21 @@ import java.math.BigDecimal;
 @Table(name = "Journal")
 public class Journal {
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
-    @NotNull
     @Column(name = "date")
     private String date;
 
-    @NotNull
     @Column(name = "currencyCode")
-    private int currencyCode;
+    private Long currencyCode;
 
-    @NotNull
     @Column(name = "rateBuy")
-    private BigDecimal rateBuy;
+    private double rateBuy;
 
-    @NotNull
     @Column(name = "rateSell")
-    private BigDecimal rateSell;
+    private double rateSell;
 
     @Bean
     Journal create() {
@@ -54,27 +49,27 @@ public class Journal {
         this.date = date;
     }
 
-    public int getCurrencyCode() {
+    public Long getCurrencyCode() {
         return currencyCode;
     }
 
-    public void setCurrencyCode(int currencyCode) {
+    public void setCurrencyCode(Long currencyCode) {
         this.currencyCode = currencyCode;
     }
 
-    public BigDecimal getRateBuy() {
+    public double getRateBuy() {
         return rateBuy;
     }
 
-    public void setRateBuy(BigDecimal rateBuy) {
+    public void setRateBuy(double rateBuy) {
         this.rateBuy = rateBuy;
     }
 
-    public BigDecimal getRateSell() {
+    public double getRateSell() {
         return rateSell;
     }
 
-    public void setRateSell(BigDecimal rateSell) {
+    public void setRateSell(double rateSell) {
         this.rateSell = rateSell;
     }
 

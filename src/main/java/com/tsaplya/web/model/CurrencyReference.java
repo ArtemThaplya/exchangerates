@@ -27,7 +27,7 @@ public class CurrencyReference {
     private String description;
 
     @Bean
-    CurrencyReference create() {
+    CurrencyReference creat() {
         return new CurrencyReference();
     }
 
