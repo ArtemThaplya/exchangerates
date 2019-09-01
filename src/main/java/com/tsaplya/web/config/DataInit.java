@@ -4,15 +4,27 @@ import com.tsaplya.web.dao.CurrencyReferenceDao;
 import com.tsaplya.web.dao.JournalDao;
 import com.tsaplya.web.model.CurrencyReference;
 import com.tsaplya.web.model.Journal;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 @Component
 public class DataInit implements ApplicationRunner {
+
+
     private JournalDao journalDao;
     private CurrencyReferenceDao currencyReferenceDao;
 
@@ -23,7 +35,7 @@ public class DataInit implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) {
+    public void run(ApplicationArguments args)  {
         long countCurrencyReference = currencyReferenceDao.count();
         long countJournal = journalDao.count();
         if (countCurrencyReference == 0) {
@@ -53,21 +65,35 @@ public class DataInit implements ApplicationRunner {
             currencyReferenceDao.save(currencyReference4);
         }
 
-        if (countJournal == 0) {
-            Journal journal = new Journal();
-            journal.setCurrencyCode(840);
-            journal.setDate("1567305609");
-            journal.setRateBuy(BigDecimal.valueOf(24.961));
-            journal.setRateSell(BigDecimal.valueOf(25.2417));
+//        JSONObject json = new JSONObject(IOUtils.toString(new URL("https://https://api.monobank.ua/bank/currency"), Charset.forName("UTF-8")));
 
-            Journal journal2 = new Journal();
-            journal2.setCurrencyCode(978);
-            journal2.setDate("1567305609");
-            journal2.setRateBuy(BigDecimal.valueOf(27.511));
-            journal2.setRateSell(BigDecimal.valueOf(28.0788));
+        JSONParser parser = new JSONParser();
 
-            journalDao.save(journal);
-            journalDao.save(journal2);
+        try {
+            URL oracle = new URL("https://https://api.monobank.ua/bank/currency");
+            URLConnection yc = oracle.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                JSONArray a = (JSONArray) parser.parse(inputLine);
+
+                for (Object o : a) {
+                    JSONObject tutorials = (JSONObject) o;
+                    if (countJournal == 0) {
+                        Journal journal = new Journal();
+                        journal.setCurrencyCode((int) tutorials.get("currencyCodeA"));
+                        journal.setDate((String) tutorials.get("date"));
+                        journal.setRateBuy((BigDecimal) tutorials.get("rateBuy"));
+                        journal.setRateSell((BigDecimal) tutorials.get("rateSell"));
+                        journalDao.save(journal);
+                    }
+                }
+            }
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException ignored) {
         }
     }
 }
