@@ -1,8 +1,27 @@
 package com.tsaplya.web.model;
 
+import org.springframework.context.annotation.Configuration;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
+@Entity
+@Configuration
+@Table(name = "CurrencyReference")
 public class CurrencyReference {
+    @Id
+    @NotNull
+    @Positive
+    @Column(name = "requestId")
     private String mnemonics;
+
+    @NotNull
+    @Positive
+    @Column(name = "currencyCode")
     private int currencyCode;
+
+    @Column(name = "description")
     private String description;
 
     public String getMnemonics() {
@@ -27,5 +46,14 @@ public class CurrencyReference {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrencyReference{" +
+                "mnemonics='" + mnemonics + '\'' +
+                ", currencyCode=" + currencyCode +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

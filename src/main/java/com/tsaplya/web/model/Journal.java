@@ -1,13 +1,37 @@
 package com.tsaplya.web.model;
 
+import org.springframework.context.annotation.Configuration;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
-
+@Entity
+@Configuration
+@Table(name = "Journal")
 public class Journal {
+    @NotNull
+    @Positive
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
+
+    @NotNull
+    @Column(name = "date")
     private String date;
+
+    @NotNull
+    @Positive
+    @Column(name = "currencyCode")
     private int currencyCode;
+
+    @NotNull
+    @Column(name = "rateBuy")
     private BigDecimal rateBuy;
+
+    @NotNull
+    @Column(name = "rateSell")
     private BigDecimal rateSell;
 
     public int getId() {
