@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Configuration
 @Table(name = "Journal")
 public class Journal {
+    @Id
     @NotNull
     @Positive
     @GeneratedValue(strategy = GenerationType.AUTO)
