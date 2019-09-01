@@ -14,7 +14,7 @@ public class CurrencyReference {
     @NotNull
     @Positive
     @Column(name = "requestId")
-    private String mnemonics;
+    private Mnemonics mnemonics;
 
     @NotNull
     @Positive
@@ -24,11 +24,11 @@ public class CurrencyReference {
     @Column(name = "description")
     private String description;
 
-    public String getMnemonics() {
+    public Mnemonics getMnemonics() {
         return mnemonics;
     }
 
-    public void setMnemonics(String mnemonics) {
+    public void setMnemonics(Mnemonics mnemonics) {
         this.mnemonics = mnemonics;
     }
 

@@ -20,10 +20,15 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 
+import static com.tsaplya.web.model.Mnemonics.EUR;
+import static com.tsaplya.web.model.Mnemonics.USD;
+
 @Component
 public class DataInit implements ApplicationRunner {
-
-
+    private final static int MNEMONICS_USD = 840;
+    private final static int MNEMONICS_EUR = 978;
+    private final static String DESCRIPTION_USD = "ДОЛЛАР США";
+    private final static String DESCRIPTION_EUR = "ЕВРО";
     private JournalDao journalDao;
     private CurrencyReferenceDao currencyReferenceDao;
 
@@ -38,33 +43,19 @@ public class DataInit implements ApplicationRunner {
         long countCurrencyReference = currencyReferenceDao.count();
         long countJournal = journalDao.count();
         if (countCurrencyReference == 0) {
-            CurrencyReference currencyReference1 = new CurrencyReference();
-            currencyReference1.setCurrencyCode(980);
-            currencyReference1.setMnemonics("UAH");
-            currencyReference1.setDescription("УКРАИНСКАЯ ГРИВНА");
+            CurrencyReference currencyReference = new CurrencyReference();
+            currencyReference.setCurrencyCode(MNEMONICS_USD);
+            currencyReference.setMnemonics(USD);
+            currencyReference.setDescription(DESCRIPTION_USD);
 
             CurrencyReference currencyReference2 = new CurrencyReference();
-            currencyReference2.setCurrencyCode(840);
-            currencyReference2.setMnemonics("USD");
-            currencyReference2.setDescription("ДОЛЛАР США");
+            currencyReference2.setCurrencyCode(MNEMONICS_EUR);
+            currencyReference2.setMnemonics(EUR);
+            currencyReference2.setDescription(DESCRIPTION_EUR);
 
-            CurrencyReference currencyReference3 = new CurrencyReference();
-            currencyReference3.setCurrencyCode(978);
-            currencyReference3.setMnemonics("EUR");
-            currencyReference3.setDescription("ЕВРО");
-
-            CurrencyReference currencyReference4 = new CurrencyReference();
-            currencyReference4.setCurrencyCode(156);
-            currencyReference4.setMnemonics("CNY");
-            currencyReference4.setDescription("ЮАНЬ ЖЕНЬМИНЬБИ (КИТАЙ)");
-
-            currencyReferenceDao.save(currencyReference1);
+            currencyReferenceDao.save(currencyReference);
             currencyReferenceDao.save(currencyReference2);
-            currencyReferenceDao.save(currencyReference3);
-            currencyReferenceDao.save(currencyReference4);
         }
-
-//        JSONObject json = new JSONObject(IOUtils.toString(new URL("https://https://api.monobank.ua/bank/currency"), Charset.forName("UTF-8")));
 
         JSONParser parser = new JSONParser();
 
@@ -78,13 +69,13 @@ public class DataInit implements ApplicationRunner {
                 JSONArray a = (JSONArray) parser.parse(inputLine);
 
                 for (Object o : a) {
-                    JSONObject tutorials = (JSONObject) o;
+                    JSONObject jsonObject = (JSONObject) o;
                     if (countJournal == 0) {
                         Journal journal = new Journal();
-                        journal.setCurrencyCode((int) tutorials.get("currencyCodeA"));
-                        journal.setDate((String) tutorials.get("date"));
-                        journal.setRateBuy((BigDecimal) tutorials.get("rateBuy"));
-                        journal.setRateSell((BigDecimal) tutorials.get("rateSell"));
+                        journal.setCurrencyCode((int) jsonObject.get("currencyCodeA"));
+                        journal.setDate((String) jsonObject.get("date"));
+                        journal.setRateBuy((BigDecimal) jsonObject.get("rateBuy"));
+                        journal.setRateSell((BigDecimal) jsonObject.get("rateSell"));
                         journalDao.save(journal);
                     }
                 }
