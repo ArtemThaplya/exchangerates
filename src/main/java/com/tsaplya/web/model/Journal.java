@@ -1,10 +1,10 @@
 package com.tsaplya.web.model;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 public class Journal {
     @Id
     @NotNull
-    @Positive
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
@@ -23,7 +22,6 @@ public class Journal {
     private String date;
 
     @NotNull
-    @Positive
     @Column(name = "currencyCode")
     private int currencyCode;
 
@@ -34,6 +32,11 @@ public class Journal {
     @NotNull
     @Column(name = "rateSell")
     private BigDecimal rateSell;
+
+    @Bean
+    Journal create() {
+        return new Journal();
+    }
 
     public int getId() {
         return id;

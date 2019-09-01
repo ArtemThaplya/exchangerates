@@ -1,28 +1,35 @@
 package com.tsaplya.web.model;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 @Entity
 @Configuration
 @Table(name = "CurrencyReference")
 public class CurrencyReference {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private int id;
+
     @NotNull
-    @Positive
-    @Column(name = "requestId")
+    @Column(name = "mnemonics")
     private Mnemonics mnemonics;
 
     @NotNull
-    @Positive
     @Column(name = "currencyCode")
     private int currencyCode;
 
     @Column(name = "description")
     private String description;
+
+    @Bean
+    CurrencyReference create() {
+        return new CurrencyReference();
+    }
 
     public Mnemonics getMnemonics() {
         return mnemonics;
