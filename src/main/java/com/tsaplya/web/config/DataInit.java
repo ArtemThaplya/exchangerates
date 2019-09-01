@@ -17,7 +17,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -35,7 +34,7 @@ public class DataInit implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args)  {
+    public void run(ApplicationArguments args) {
         long countCurrencyReference = currencyReferenceDao.count();
         long countJournal = journalDao.count();
         if (countCurrencyReference == 0) {
