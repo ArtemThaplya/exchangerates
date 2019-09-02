@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Entity
 @Configuration
@@ -20,7 +18,7 @@ public class Journal {
     private String date;
 
     @Column(name = "currencyCode")
-    private Long currencyCode;
+    private Integer currencyCode;
 
     @Column(name = "rateBuy")
     private double rateBuy;
@@ -49,11 +47,11 @@ public class Journal {
         this.date = date;
     }
 
-    public Long getCurrencyCode() {
+    public Integer getCurrencyCode() {
         return currencyCode;
     }
 
-    public void setCurrencyCode(Long currencyCode) {
+    public void setCurrencyCode(Integer currencyCode) {
         this.currencyCode = currencyCode;
     }
 
