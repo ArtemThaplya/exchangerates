@@ -1,4 +1,4 @@
-package com.tsaplya.web.service;
+package com.tsaplya.web.service.Interfaces;
 
 import java.io.IOException;
 

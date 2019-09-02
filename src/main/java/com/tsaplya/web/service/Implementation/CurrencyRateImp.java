@@ -1,7 +1,8 @@
-package com.tsaplya.web.service;
+package com.tsaplya.web.service.Implementation;
 
 import com.tsaplya.web.dao.JournalDao;
 import com.tsaplya.web.model.Journal;
+import com.tsaplya.web.service.Interfaces.CurrencyRate;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -28,9 +29,9 @@ public class CurrencyRateImp implements CurrencyRate {
         this.journalDao = journalDao;
     }
 
-    /*
-    Запрашиваем и сохраняем курсы валют в журнал (доллар и евро по отношению к гривне).
-     **/
+    /**
+     * Запрашиваем и сохраняем курсы валют в журнал (доллар и евро по отношению к гривне).
+     */
     public void getCurrencyRate() throws IOException {
         long countJournal = journalDao.count();
 

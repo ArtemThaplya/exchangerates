@@ -1,6 +1,9 @@
 package com.tsaplya.web.service;
 
 import com.tsaplya.web.model.Journal;
+import com.tsaplya.web.service.Interfaces.CodeCurrency;
+import com.tsaplya.web.service.Interfaces.CurrencyRate;
+import com.tsaplya.web.service.Interfaces.SearchEntriesByCodeAndDate;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

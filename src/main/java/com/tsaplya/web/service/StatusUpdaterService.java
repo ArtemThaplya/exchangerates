@@ -1,11 +1,11 @@
 package com.tsaplya.web.service;
 
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ public class StatusUpdaterService {
         this.httpClient = httpClient;
     }
 
-    /*
-    Если записи нет в журнале - запрос курса через сторонний http сервис. В доке монобанка написано, что курс обновляется не чаще 1 раз в 5 минут. По-этому добавил HttpClient, что бы курс обновлялся каждые 5 минут). Разбор ответа и помещение записи в журнал (после чего полученные курсы возвращаются в ответе).
-     **/
+    /**
+     * Если записи нет в журнале - запрос курса через сторонний http сервис. В доке монобанка написано, что курс обновляется не чаще 1 раз в 5 минут. По-этому добавил HttpClient, что бы курс обновлялся каждые 5 минут). Разбор ответа и помещение записи в журнал (после чего полученные курсы возвращаются в ответе).
+     */
     @Bean
     public Runnable updateStatus() {
         return new Runnable() {

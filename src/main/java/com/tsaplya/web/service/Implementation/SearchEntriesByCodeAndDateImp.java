@@ -1,7 +1,8 @@
-package com.tsaplya.web.service;
+package com.tsaplya.web.service.Implementation;
 
 import com.tsaplya.web.dao.JournalDao;
 import com.tsaplya.web.model.Journal;
+import com.tsaplya.web.service.Interfaces.SearchEntriesByCodeAndDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +26,9 @@ public class SearchEntriesByCodeAndDateImp implements SearchEntriesByCodeAndDate
         this.journalDao = journalDao;
     }
 
-    /*
-            Поиск записи в журнале по коду и текущей дате. Если запись есть - возвращаем её в ответе.
-             **/
+    /**
+     * Поиск записи в журнале по коду и текущей дате. Если запись есть - возвращаем её в ответе.
+     */
     public Journal searchForJournalEntriesByCodeAndCurrentDate(int currencyCode) {
         Iterable<Journal> all = journalDao.findAll();
         for (Journal journal : all) {

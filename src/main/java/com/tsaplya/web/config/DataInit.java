@@ -23,6 +23,9 @@ public class DataInit implements ApplicationRunner {
         this.currencyReferenceDao = currencyReferenceDao;
     }
 
+    /**
+     * Справочник валют (мнемоника, код, описание).
+     */
     @Override
     public void run(ApplicationArguments args) {
         long countCurrencyReference = currencyReferenceDao.count();
