@@ -18,7 +18,9 @@ http://localhost:8080/journal?currencyCode=USD
     "rateSell": 25.3698
 }
 ~~~
+
 ###Проверка наличия переданной валюты в справочнике
+
 **Запрос:**
 ~~~
 http://journal?currencyCode="код другой валюты" 
