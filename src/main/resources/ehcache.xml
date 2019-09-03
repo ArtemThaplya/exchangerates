@@ -1,0 +1,20 @@
+<ehcache>
+    <diskStore path="java.io.tmpdir" />
+
+    <defaultCache maxElementsInMemory="5"
+                  eternal="true"
+                  overflowToDisk="false"
+                  timeToLiveSeconds="300" />
+
+    <cache name="getCodeCurrencyFromReference"
+           maxElementsInMemory="5"
+           eternal="false"
+           overflowToDisk="false"
+           timeToLiveSeconds="300" />
+
+    <cache name="getRateBuyAndSale"
+           maxElementsInMemory="5"
+           eternal="false"
+           overflowToDisk="false"
+           timeToLiveSeconds="300" />
+</ehcache>

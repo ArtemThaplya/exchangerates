@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.text.ParseException;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
@@ -22,13 +19,8 @@ public class JournalController {
     }
 
     @RequestMapping(value = "/journal", method = GET)
-    public Journal get(@RequestParam(value = "currencyCode") String mnemonics) throws ParseException {
+    public Journal get(@RequestParam(value = "currencyCode") String mnemonics) {
         int currencyCode = searchService.getCodeCurrencyFromReference(mnemonics);
         return searchService.getRateBuyAndSale(currencyCode);
-    }
-
-    @RequestMapping(value = "/current/rate")
-    public void currentRate() throws IOException {
-        searchService.getCurrencyRateMonobank();
     }
 }
